@@ -4,25 +4,17 @@
 
 Jellyfin Music Orgainizer will automatically sort your music into folders that Jellyfin can read
 
-
 !!! IMPORTANT !!!
 
 It is highly recomended that you create a copy of the music you are orgainizing incase something happens that is unexpected
 
-
 This will create a folder structure like this below:
 
-/Music
-    /Artist
-        /Album
-            01 - Song.mp3
-            02 - Song.mp3
-
+![1688631211429](image/readme/1688631211429.png)
 
 It is important that all your songs have an artist and album name
 
 If not, you can use something like Mp3tag to add them manually
-
 
 1. Open: Jelllyfin Music Orgainizer.exe
 2. Select the folder with your unorgainized music

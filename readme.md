@@ -16,6 +16,8 @@ It is important that all your songs have an artist and album name
 
 If not, you can use something like Mp3tag to add them manually
 
+Also note: you only need to keep the .exe file. The other files are just there to show the code being used.
+
 1. Open: Jelllyfin Music Orgainizer.exe
 2. Select the folder with your unorgainized music
 
@@ -24,7 +26,7 @@ If not, you can use something like Mp3tag to add them manually
 
    1. It will ignore everthing else
    2. If you have multiple different music file extentions you will have to run this multiple times
-   3. Supported music file extentions: [".aac", ".aif", ".aiff", ".ape", ".ac3", ".flac", ".m4a", ".mp3", ".mp4", ".mpc", ".mpp", ".ofs", ".ofr", ".ogg", ".tta", ".wav", ".wma", ".wv"]
+   3. Supported music file extentions: [".aif", ".aiff", ".ape", ".flac", ".m4a", ".m4b", ".m4r", ".mp2", ".mp3", ".mp4", ".mpc", ".ogg", ".opus", ".wav", ".wma"]
 4. Name the destination folder name if you are not satisfied with the defalt
 5. You can save these settings for the future if you want
 

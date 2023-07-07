@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon, QRegExpValidator
 from pathlib import Path
 import qdarkstyle
 import mutagen
+from mutagen.asf import ASFUnicodeAttribute
 import json
 from resources_rc import *
 
@@ -52,7 +53,7 @@ class JellyfinMusicOrganizer(QMainWindow):
         self.icon_label.setPixmap(QIcon(':/Octopus.ico').pixmap(24, 24))
         title_layout.addWidget(self.icon_label)
 
-        self.title_label = QLabel("Jellyfin Music Organizer")
+        self.title_label = QLabel("Jellyfin Music Organizer v2.07")
         self.title_label.setStyleSheet("color: white;")
         title_layout.addWidget(self.title_label)
 
@@ -127,8 +128,8 @@ class JellyfinMusicOrganizer(QMainWindow):
         self.file_ext_label = QLabel('File Extension')
         hbox_file_ext.addWidget(self.file_ext_label)
         self.file_ext_dropdown = QComboBox()
-        self.file_ext_dropdown.addItems([".aac", ".aif", ".aiff", ".ape", ".ac3", ".flac", ".m4a", ".mp3", ".mp4",
-                                        ".mpc", ".mpp", ".ofs", ".ofr", ".ogg", ".tta", ".wav", ".wma", ".wv"])
+        self.file_ext_dropdown.addItems([".aif", ".aiff", ".ape", ".flac", ".m4a", ".m4b", ".m4r", ".mp2",
+                                          ".mp3", ".mp4", ".mpc", ".ogg", ".opus", ".wav", ".wma"])
         self.file_ext_dropdown.setCurrentText(self.file_extension)
         hbox_file_ext.addWidget(self.file_ext_dropdown, 1)
 
@@ -316,6 +317,27 @@ class OrganizeThread(QThread):
         total_number_of_songs = len(pathlist)
         self.number_songs_signal.emit(total_number_of_songs)
 
+        # Mapping of metadata keys based on file extension
+        metadata_keys = {
+            '.aif': ['TPE1', 'TALB'],
+            '.aiff': ['TPE1', 'TALB'],
+            '.ape': ['ARTIST', 'ALBUM'],
+            '.flac': ['artist', 'album'],
+            '.m4a': ['©ART', '©alb'],
+            '.m4b': ['©ART', '©alb'],
+            '.m4r': ['©ART', '©alb'],
+            '.mp2': ['TPE1', 'TALB'],
+            '.mp3': ['TPE1', 'TALB'],
+            '.mp4': ['©ART', '©alb'],
+            '.mpc': ['ARTIST', 'ALBUM'],
+            '.ogg': ['artist', 'album'],
+            '.opus': ['artist', 'album'],
+            '.wav': ['TPE1', 'TALB'],
+            '.wma': ['Author', 'WM/AlbumTitle']
+        }
+
+        #Future Reference | These file types do not work: aac, ac3, adts, mp1, ofr, ofs, tta, wv
+
         # Check if folder has any songs
         if total_number_of_songs:
 
@@ -325,10 +347,18 @@ class OrganizeThread(QThread):
                 path_in_str = str(path).replace('\\', '/')
                 # Get file name from path
                 file_name = path_in_str.split("/")[-1]
-                # Get artist and album from metadata
+                # Extract artist and album from metadata based on file extension
                 metadata = mutagen.File(path_in_str)
-                artist = metadata.get('©ART', ['Unknown Artist'])[0].replace('/', '').replace('\\', '').strip()
-                album = metadata.get('©alb', ['Unknown Album'])[0].replace('/', '').replace('\\', '').strip()
+                artist_key = metadata_keys[self.info['selected_extension']][0]
+                album_key = metadata_keys[self.info['selected_extension']][1]
+                artist_data = metadata.get(artist_key, ['Unknown Artist'])
+                album_data = metadata.get(album_key, ['Unknown Album'])
+                # Convert the metadata values to strings
+                artist = str(artist_data[0]) if isinstance(artist_data[0], ASFUnicodeAttribute) else artist_data[0]
+                album = str(album_data[0]) if isinstance(album_data[0], ASFUnicodeAttribute) else album_data[0]
+                # Remove unwanted characters and whitespace
+                artist = artist.replace('/', '').replace('\\', '').strip()
+                album = album.replace('/', '').replace('\\', '').strip()
                 # Construct new location
                 new_location = f"./{self.info['selected_destination_name']}/{artist}/{album}"
                 new_location = new_location.translate(str.maketrans("", "", ':*?<>|'))

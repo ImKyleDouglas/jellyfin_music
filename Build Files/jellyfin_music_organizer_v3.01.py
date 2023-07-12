@@ -48,7 +48,7 @@ class JellyfinMusicOrganizer(QMainWindow):
         self.icon_label.setPixmap(QIcon(':/Octopus.ico').pixmap(24, 24))
         title_layout.addWidget(self.icon_label)
 
-        self.title_label = QLabel("Jellyfin Music Organizer v3.00")
+        self.title_label = QLabel("Jellyfin Music Organizer v3.01")
         self.title_label.setStyleSheet("color: white;")
         title_layout.addWidget(self.title_label)
 
@@ -725,28 +725,26 @@ class MusicErrorWindow(QMainWindow):
         file_name, _ = QFileDialog.getSaveFileName(self, "Save CSV", "", "CSV Files (*.csv)")
         if file_name:
             try:
-                # Collect all unique metadata keys
-                metadata_keys = set()
-                for info in self.error_info:
-                    metadata_keys.update(info['metadata'].keys())
-
-                # Sort metadata keys
-                metadata_keys = sorted(metadata_keys)
-
                 # Create a list to store all rows
                 rows = []
 
                 # Generate rows
                 for info in self.error_info:
+                    metadata_dict = {str(key): str(value) for key, value in info['metadata_dict'].items()}
+
+                    # Set "None" for empty artist and album values
+                    artist_found = info['artist_found'] if info['artist_found'] else "None"
+                    album_found = info['album_found'] if info['album_found'] else "None"
+
                     row = [
                         info['filename'],
                         info['error'],
-                        info['artist_found'],
-                        info['album_found']
+                        artist_found,
+                        album_found
                     ]
 
                     # Generate metadata values for the current row
-                    metadata_values = [f"{key} : {info['metadata'].get(key)}" for key in metadata_keys if key in info['metadata']]
+                    metadata_values = [f"{key} : {metadata_dict.get(key)}" for key in metadata_dict.keys()]
 
                     # Add the metadata values to the row
                     row.extend(metadata_values)
@@ -765,8 +763,8 @@ class MusicErrorWindow(QMainWindow):
                 header = ['File Name', 'Error', 'Artist Found', 'Album Found']
                 header.extend(['Metadata {}'.format(i + 1) for i in range(max_columns - len(header))])
 
-                # Write to the CSV file
-                with open(file_name, mode='w', newline='') as file:
+                # Write to the CSV file with UTF-8 encoding
+                with open(file_name, mode='w', encoding='utf-8-sig', newline='') as file:
                     writer = csv.writer(file)
                     writer.writerow(header)
                     writer.writerows(rows)
@@ -788,16 +786,25 @@ class MusicErrorWindow(QMainWindow):
                 # Generate rows
                 rows = []
                 for info in self.error_info:
+                    metadata_dict = {str(key): str(value) for key, value in info['metadata_dict'].items()}
+
+                    # Set "None" for empty artist and album values
+                    artist_found = info['artist_found'] if info['artist_found'] else "None"
+                    album_found = info['album_found'] if info['album_found'] else "None"
+
                     row = [
                         info['filename'],
                         info['error'],
-                        info['artist_found'],
-                        info['album_found']
+                        artist_found,
+                        album_found
                     ]
 
                     # Generate metadata values for the current row
-                    metadata_values = [f"{key} : {info['metadata'].get(key)}" for key in sorted(info['metadata'].keys())]
+                    metadata_values = [f"{key} : {metadata_dict.get(key)}" for key in sorted(metadata_dict.keys())]
                     row.extend(metadata_values)
+
+                    # Convert problematic values to strings before appending to the row
+                    row = [str(cell) if isinstance(cell, list) else cell for cell in row]
 
                     # Add the row to the list
                     rows.append(row)
@@ -848,12 +855,13 @@ class MusicErrorWindow(QMainWindow):
             try:
                 data = []
                 for info in self.error_info:
+                    metadata_dict = {str(key): str(value) for key, value in info['metadata_dict'].items()}
                     row_data = {
-                        'File Name': info['filename'],
-                        'Error': info['error'],
-                        'Artist Found': info['artist_found'],
-                        'Album Found': info['album_found'],
-                        'Metadata': info['metadata']
+                        'filename': info['filename'],
+                        'error': info['error'],
+                        'artist_found': info['artist_found'],
+                        'album_found': info['album_found'],
+                        'metadata_dict': metadata_dict
                     }
                     data.append(row_data)
 

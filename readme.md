@@ -1,12 +1,9 @@
-# Jellyfin Music Orgainizer v2.07
+# Jellyfin Music Orgainizer v3.00
 
-![1688611051209](image/readme/1688611051209.png)
+![1689158095942](image/readme/1689158095942.png)
 
 Jellyfin Music Orgainizer will automatically sort your music into folders that Jellyfin can read
 
-!!! IMPORTANT !!!
-
-It is highly recomended that you create a copy of the music you are orgainizing incase something happens that is unexpected
 
 This will create a folder structure like this below:
 
@@ -16,30 +13,27 @@ It is important that all your songs have an artist and album name
 
 If not, you can use something like Mp3tag to add them manually
 
+If an error occurs or if the audio file doesn't have artist or album name, an error window will open like this below
+
+![1689158209357](image/readme/1689158209357.png)
+
+Hopefully you will never have to see this but, it gives you all the necessary information that you need to diagnose the problem
+
+
+
 Also note: you only need to keep the .exe file. The other files are just there to show the code being used.
 
 1. Open: Jelllyfin Music Orgainizer.exe
 2. Select the folder with your unorgainized music
 
-   1. This program will cut the music from this file location and move/paste it in the destination location
-3. Select the file extention of your music files
-
-   1. It will ignore everthing else
-   2. If you have multiple different music file extentions you will have to run this multiple times
+   1. This program will copy the music from this file location and paste it in the destination location
+   2. This will also look in the subfolders of your selected music folder
    3. Supported music file extentions: [".aif", ".aiff", ".ape", ".flac", ".m4a", ".m4b", ".m4r", ".mp2", ".mp3", ".mp4", ".mpc", ".ogg", ".opus", ".wav", ".wma"]
-4. Name the destination folder name if you are not satisfied with the defalt
-5. You can save these settings for the future if you want
+      1. It will automatically look for every file with these file extentions
+3. Select your destination folder. Everything will be saved here
+4. You can save these settings for the future if you want
 
-   1. It will create a json file with folder location, file extention, and destination folder name data
-6. When you click Organize, the destination folder will be created in the same place as the Jelllyfin Music Orgainizer.exe
-7. It will tell you how many songs it found and the progress bar will update accordingly
-8. You can now copy the file system that Jellyfin Music Orgainizer made and paste it into your Jellyfin Media Server music file location
-
-   1. It is a good idea to also copy these files to a local storage location to somewhere like 'Jellyfin Music'
-   2. When you do this again in the future all you have to to is:
-      1. Put new songs into specific folder to select
-      2. Make sure destination folder is empty
-      3. Click orgainize
-      4. Copy file structure to Jellyfin Media Server and local storage
-   3. Duplicate folders coppied over will combine into one
-9. Done
+   1. It will create a json file with music folder location and destination folder name
+5. It will tell you how many songs it found and the progress bar will update accordingly
+6. You can now copy the file system that Jellyfin Music Orgainizer made and paste it into your Jellyfin Media Server music file location
+7. Done

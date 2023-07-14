@@ -1,9 +1,8 @@
-# Jellyfin Music Orgainizer v3.01
+# Jellyfin Music Orgainizer v3.03
 
 ![1689158095942](image/readme/1689158095942.png)
 
 Jellyfin Music Orgainizer will automatically sort your music into folders that Jellyfin can read
-
 
 This will create a folder structure like this below:
 
@@ -19,8 +18,6 @@ If an error occurs or if the audio file doesn't have artist or album name, an er
 
 Hopefully you will never have to see this but, it gives you all the necessary information that you need to diagnose the problem
 
-
-
 Also note: you only need to keep the .exe file. The other files are just there to show the code being used.
 
 1. Open: Jelllyfin Music Orgainizer.exe
@@ -31,7 +28,7 @@ Also note: you only need to keep the .exe file. The other files are just there t
    3. Supported music file extentions: [".aif", ".aiff", ".ape", ".flac", ".m4a", ".m4b", ".m4r", ".mp2", ".mp3", ".mp4", ".mpc", ".ogg", ".opus", ".wav", ".wma"]
       1. It will automatically look for every file with these file extentions
 3. Select your destination folder. Everything will be saved here
-4. You can save these settings for the future if you want
+4. You can save these settings for the future if you want (You don't have to save)
 
    1. It will create a json file with music folder location and destination folder name
 5. It will tell you how many songs it found and the progress bar will update accordingly

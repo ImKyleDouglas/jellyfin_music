@@ -1,4 +1,4 @@
-# Jellyfin Music Orgainizer v3.03
+# Jellyfin Music Orgainizer v3.04
 
 ![1689158095942](image/readme/1689158095942.png)
 
@@ -11,6 +11,10 @@ This will create a folder structure like this below:
 It is important that all your songs have an artist and album name
 
 If not, you can use something like Mp3tag to add them manually
+
+If any of your files are already in the desired destination then you will be asked if you want to replace or skip the files
+
+![1689595130944](image/readme/1689595130944.png)
 
 If an error occurs or if the audio file doesn't have artist or album name, an error window will open like this below
 

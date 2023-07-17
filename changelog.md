@@ -1,3 +1,18 @@
+# Jellyfin Music Organizer v3.04
+
+Pushed to GitHub on July 17, 2023
+
+* Progress bar function only updates progress bar percentage and style now. Nothing else. Also, every time the progress bar is updated, it will only apply a new style sheet if the current style sheet doesn't equal the desired style sheet
+* TXT, CSV, Excel, and JSON buttons now change color if the file was successfuly built
+* Changed 'filename' to 'file_name' in error_files dictionary for orgainize_thread.py and music_error_window.py
+* OrganizeThread reconstructed to work with new recall_files dictionary
+* OrganizeThread progress bar only updates if the file is not put in replace_skip_files dictionary
+* Progress bar organize_progress function is triggered and resets to zero after hitting the organize button
+* Function kill_thread will only attempt to kill the given thread if it exists
+* Main window no longer fully disables, only the user interface including the close button. windowEnabled and windowDisabled removed as they are no longer needed
+* Replace or Skip window feature added. After you hit the 'Organize' button, if the desired file location already has that file name, a window will pop up asking you if you want to replace or skip the selected file. You can also 'Skip All' or 'Replace All'. Progress bar shows progress of only the entries in the Replace or Skip window
+* Fixed a bug where the program would crash if you tried to drag/move a window without a draggable attribute using mouseMoveEvent
+
 # Jellyfin Music Organizer v3.03
 
 Pushed to GitHub on July 14, 2023

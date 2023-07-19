@@ -1,3 +1,15 @@
+# Jellyfin Music Organizer v3.05
+
+Pushed to GitHub on July 19, 2023
+
+* All windows can now dynamically expand and contract
+* All windows have a grip in the bottom right to expand the window size
+* All close buttons, minimize buttons, and grips now have a tool tip that appear on hover
+* Splitter on Music Error WIndow removed as it is no longer needed
+* Settings window added
+* Settings buttons to save and reset on music_organizer.py moved to the settings window
+* You can now mute all sounds in the settings window
+
 # Jellyfin Music Organizer v3.04
 
 Pushed to GitHub on July 17, 2023

@@ -1,4 +1,4 @@
-# Jellyfin Music Orgainizer v3.05
+# Jellyfin Music Orgainizer v3.06
 
 ![1689769189707](image/readme/1689769189707.png)
 

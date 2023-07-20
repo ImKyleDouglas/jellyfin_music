@@ -1,3 +1,10 @@
+# Jellyfin Music Organizer v3.06
+
+Pushed to GitHub on July 20, 2023
+
+* Main and settings window now open at a set size instead of the smallest window possible
+* Notification audio now uses .wav files instead of bytearrays
+
 # Jellyfin Music Organizer v3.05
 
 Pushed to GitHub on July 19, 2023
